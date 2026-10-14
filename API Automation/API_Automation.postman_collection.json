@@ -1,0 +1,207 @@
+{
+  "info": {
+    "_postman_id": "7fd9264d-304f-446c-9ba2-4b603202e218",
+    "name": "API Automation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56518194",
+    "_collection_link": "https://go.postman.co/collection/56518194-7fd9264d-304f-446c-9ba2-4b603202e218?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\r\npm.test(\"Status code is 200\", () => {\r\n    pm.expect(pm.response.code).to.eql(200);\r\n});\r\npm.collectionVariables.set(\"authToken\", responseBody.token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \n    \"email\": \"michael.lawson@reqres.in\",  \n    \"password\": \"cityslicka\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/login",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\r\n\r\npm.test(\"varified name\", function (){\r\n    pm.expect(responseBody.data.first_name).to.eql(\"Michael\");\r\n    pm.expect(responseBody.data.last_name).to.eql(\"Lawson\");\r\n})\r\n\r\npm.test(\"varified email\", function () {\r\n    pm.expect(responseBody.data.email).to.eql(\"michael.lawson@reqres.in\");\r\n})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://reqres.in/api/users/7",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\n\npm.test(\"verify updated\", function () {\n    pm.expect(responseBody.name).to.eql(\"sima\")\n    pm.expect(responseBody.job).to.eql(\"QA Engineer\")\n})\npm.test(\"updatedAt timestamp exists\", () => {\n    pm.expect(responseBody.updatedAt).to.be.a(\"string\").and.not.empty;\n    pm.expect(Date.parse(responseBody.updatedAt)).to.not.be.NaN;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"sima\",\r\n    \"job\": \"QA Engineer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/users/4",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\r\npm.test(\"Check if the last_name is updated\", function () {\r\n    pm.expect(responseBody.last_name).to.eql(\"jennifer\");\r\n    \r\n})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"last_name\": \"jennifer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/users/2",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bad Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is in 4xx range\", () => {\r\n    pm.expect(pm.response.code).to.be.within(400, 499);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://reqres.in/api/users/99999",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "99999"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "authToken",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    }
+  ]
+}

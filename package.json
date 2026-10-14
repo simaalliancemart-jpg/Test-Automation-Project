@@ -1,0 +1,29 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "sima",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test:all": "npx playwright test --headed",
+    "test:auth": "npx playwright test tests/q1-locked-out.spec.js --headed",
+    "test:example": "npx playwright test tests/example.spec.js --headed"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "playwright": "^1.63.0",
+    "playwright-core": "^1.63.0",
+    "undici-types": "^8.9.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.3",
+    "newman": "^6.2.3"
+  }
+}

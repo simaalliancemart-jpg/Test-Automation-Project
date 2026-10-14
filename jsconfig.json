@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": [
+    "playwright.config.js",
+    "pageObject/**/*.js",
+    "tests/**/*.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
